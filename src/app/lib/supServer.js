@@ -35,6 +35,13 @@ export async function getCurrentUser() {
             return null;
         }
 
+        if (
+            error.code === "refresh_token_not_found" ||
+            error.message?.includes("Refresh Token")
+        ) {
+            return null;
+        }
+
         console.error("Error al obtener la sesión:", error.message);
         throw error;
     }

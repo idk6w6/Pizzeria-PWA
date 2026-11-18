@@ -3,6 +3,8 @@ import Link from "next/link";
 import "./globals.css";
 import { getCurrentUser } from "./lib/supServer";
 import { CerrarSesion } from "./actions/AuthActions";
+import RegistrarSW from "./componentes/RegistrarSW";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -75,6 +77,7 @@ export default async function RootLayout({ children }) {
         </header>
 
         {children}
+        <RegistrarSW authenticated={Boolean(user)} />
       </body>
     </html>
   );

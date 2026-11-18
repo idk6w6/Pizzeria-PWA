@@ -1,6 +1,7 @@
 import { getProductos } from "../actions/productosActions.js";
 import TarjetaProducto from "../componentes/TarjetaProducto.js";
 
+
 export default async function ProductoPage() {
     const products = await getProductos();
 
