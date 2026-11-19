@@ -1,7 +1,8 @@
-const CACHE_NAME = 'v2-cache-app';
+const CACHE_NAME = 'v3-cache-app';
 const IMAGE_CACHE_NAME = 'imagenes-supabase-v1';
  
-const OFFLINE_PAGE = '/';
+const OFFLINE_PAGE = '/offline.html';
+const START_PAGE = '/';
 const AUTH_PAGES = ['/inicio', '/producto', '/contacto'];
 
 async function findCachedPage(request, pathname) {
@@ -11,6 +12,7 @@ async function findCachedPage(request, pathname) {
     await Promise.all(
       AUTH_PAGES.map((page) => caches.match(page))
     ).then((responses) => responses.find(Boolean)) ||
+    await caches.match(START_PAGE) ||
     await caches.match(OFFLINE_PAGE)
   );
 }
@@ -21,7 +23,13 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then(async (cache) => {
       console.log('[SW] Cacheando recursos estáticos');
       await Promise.allSettled(
-        [OFFLINE_PAGE, ...AUTH_PAGES].map((path) => cache.add(path))
+        [
+          START_PAGE,
+          OFFLINE_PAGE,
+          '/images/inicio-1.jpg',
+          '/images/inicio-2.jpg',
+          '/images/inicio-3.jpg',
+        ].map((path) => cache.add(path))
       );
     })
   );
@@ -66,7 +74,7 @@ self.addEventListener('fetch', (event) => {
           const cachedPage = await findCachedPage(event.request, url.pathname);
           if (cachedPage) return cachedPage;
 
-          return Response.error();
+          return caches.match(OFFLINE_PAGE) || Response.error();
         })
     );
     return;
@@ -114,7 +122,7 @@ self.addEventListener('fetch', (event) => {
         const cachedPage = await caches.match(url.pathname);
         if (cachedPage) return cachedPage;
  
-        return caches.match('/');
+        return caches.match(OFFLINE_PAGE);
       })
   );
 });

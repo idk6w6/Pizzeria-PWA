@@ -19,6 +19,13 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "PWA Site",
   description: "Productos y contacto de PWA Site",
+  icons: {
+    apple: "/icon.svg",
+  },
+};
+
+export const viewport = {
+  themeColor: "#450a0a",
 };
 
 export default async function RootLayout({ children }) {
