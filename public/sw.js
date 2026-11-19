@@ -1,4 +1,4 @@
-const CACHE_NAME = 'v3-cache-app';
+const CACHE_NAME = 'v4-cache-app';
 const IMAGE_CACHE_NAME = 'imagenes-supabase-v1';
  
 const OFFLINE_PAGE = '/offline.html';

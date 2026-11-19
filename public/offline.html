@@ -42,6 +42,20 @@
         font-weight: 700;
         cursor: pointer;
       }
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      a {
+        border-radius: 999px;
+        padding: 12px 20px;
+        background: #f59e0b;
+        color: #450a0a;
+        font-weight: 700;
+        text-decoration: none;
+      }
     </style>
   </head>
   <body>
@@ -49,7 +63,10 @@
       <div class="mark" aria-hidden="true">P</div>
       <h1>Sin conexion</h1>
       <p>No pudimos cargar esta pagina. Revisa tu conexion y vuelve a intentarlo.</p>
-      <button type="button" onclick="location.reload()">Reintentar</button>
+      <div class="actions">
+        <a href="/producto">Ver productos</a>
+        <button type="button" onclick="location.reload()">Reintentar</button>
+      </div>
     </main>
   </body>
 </html>

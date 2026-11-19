@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata = {
   title: "PWA Site",
   description: "Productos y contacto de PWA Site",
+  manifest: "/manifest.webmanifest",
   icons: {
     apple: "/icon.svg",
   },
